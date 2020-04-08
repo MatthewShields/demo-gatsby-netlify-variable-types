@@ -1,0 +1,9 @@
+.block {
+  border: 1px black solid;
+  margin: 1rem 0 0;
+  padding: 1rem;
+}
+
+.block > h3 {
+  margin-top: 0;
+}

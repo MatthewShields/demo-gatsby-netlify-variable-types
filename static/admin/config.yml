@@ -1,0 +1,57 @@
+backend:
+  name: github # Refer to https://www.netlifycms.org/docs/authentication-backends/ for auth backend list and instructions
+  branch: master # Branch to update
+  repo: MatthewShields/gatsby-netlify-cms-variable-types # Repo for pushing new commits. Make sure to replace with your repo!
+
+media_folder: static/assets
+public_folder: assets
+
+collections:
+  - name: pages
+    label: "Page"
+    folder: "content/pages"
+    media_folder: ''
+    public_folder: ''
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}.md"
+    fields:
+      - { label: "post_type", name: "post_type", widget: "hidden", default: "page" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Short Description", name: "short_description", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - label: 'Page Section'
+        name: 'sections'
+        widget: 'list'
+        types:
+          - label: 'Text Block'
+            name: 'text_block'
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: markdown }
+          - label: 'Carousel'
+            name: 'carousel'
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: markdown }
+              - label: 'Images'
+                name: images
+                widget: list
+                fields:
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: Image Description, name: alt, widget: string }
+          - label: 'Block List'
+            name: 'block_list'
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string, required: false }
+              - { label: Text, name: text, widget: markdown, required: false }
+              - label: 'Blocks'
+                name: blocks
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Text, name: text, widget: markdown }
